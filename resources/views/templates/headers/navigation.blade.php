@@ -18,6 +18,7 @@ aria-expanded="false">Profile</a>
 <li><a class="dropdown-item" href="{{ url('/profile/identity')
 }}">Identity</a></li>
 <li><a class="dropdown-item" href="{{ url('/profile/family') }}">Family</a></li>
+<li><a class="dropdown-item" href="{{ route('signout') }}">Sign Out</a></li>
 </ul>
 </li>
 </ul>

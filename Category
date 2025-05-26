@@ -1,0 +1,4 @@
+Category::create([
+    'name' => 'Minuman',
+    'slug' => 'minuman'
+])
