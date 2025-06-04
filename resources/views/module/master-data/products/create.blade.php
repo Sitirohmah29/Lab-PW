@@ -47,6 +47,16 @@
             </div>
 
             <div class="mb-3">
+                <label for="categoryFilter" class="form-label fw-bold">Filter by Category:</label>
+                <select class="form-select" id="categoryFilter" onchange="filterByCategory()">
+                    <option value="">-- All Categories --</option>
+                    @foreach($categories as $cat)
+                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label">Active</label>
                 <div class="d-flex justify-content-start align-items-center">
                     <label class="me-2">

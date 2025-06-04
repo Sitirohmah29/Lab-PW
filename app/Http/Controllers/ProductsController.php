@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Products;
 use Illuminate\Http\Request;
 
@@ -12,12 +13,20 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function index()
+    // {
+    //     $products = Products::latest()->paginate(5);
+    //     return view('module.master-data.products.index', compact('products'))
+    //         ->with('i', (request()->input('page', 1) - 1) * 5);
+    // }
+
     public function index()
     {
-        $products = Products::latest()->paginate(5);
-        return view('module.master-data.products.index', compact('products'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
-    }
+        
+        $products = Products::with('category')->latest()->paginate(5);
+        $categories = Category::all();
+        return view('module.master-data.products.index', compact('products', 'categories'));
+}
 
     /**
      * Show the form for creating a new resource.

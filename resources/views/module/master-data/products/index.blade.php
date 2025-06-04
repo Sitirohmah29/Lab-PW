@@ -19,6 +19,7 @@
                                 <th width="30%">Name</th>
                                 <th>Description</th>
                                 <th width="20%">Price</th>
+                                <th width="10%">Category</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -35,6 +36,7 @@
                                             </div>
                                         </td>
                                         <td>Rp {{ number_format($product->price, 0, ',', '.') }}</td>
+                                        <td>{{ $product->category->name ?? '-' }}</td>
                                         <td>{{ $product->is_active ? 'Yes' : 'No' }}</td>
                                         <td>
                                             <div class="btn-group">

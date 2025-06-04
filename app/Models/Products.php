@@ -47,4 +47,8 @@ class Products extends Model
         $results = Products::where($condition)->delete();
         return $results;
     }
+
+    public function category(){
+        return $this->belongsTo(Category ::class, 'category_id');
+    }
 }
