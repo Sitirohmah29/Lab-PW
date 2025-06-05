@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Products extends Model
 {
     use HasFactory;
+    
     protected $table = 'products';
 
     protected $fillable = [
@@ -16,39 +16,39 @@ class Products extends Model
         'description',
         'price',
         'image',
-        'is_active'
+        'is_active',
+        'category_id',
+        'user_id'
     ];
 
     public function storeData($data){
-        $results = Products::create($data);
-        return $results;
+        return self::create($data);
     }
 
     public function getByCondition($condition){
-        $results = DB::table($this->table)
-            ->where($condition);
-        return $results->get();
+        return self::where($condition)->get();
     }
 
-    public function updateDate($data){
-        $isExist = $this->getByCondition(array(['id', $data['id']]))->first();
-        if(!empty($isExist)){
+    public function updateData($data){
+        $product = self::find($data['id']);
+        if ($product) {
             unset($data['_token']);
-            $results = DB::table($this->table)
-                ->where(array('id'=>$data['id']))
-                ->update($data);
-            return $results;
-        }else{
-            return null;
+            $product->update($data);
+            return $product;
         }
+        return null;
     }
 
-    public function removeBycondition($condition){
-        $results = Products::where($condition)->delete();
-        return $results;
+    public function removeByCondition($condition){
+        return self::where($condition)->delete();
     }
 
     public function category(){
-        return $this->belongsTo(Category ::class, 'category_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
 }

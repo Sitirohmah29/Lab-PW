@@ -11,6 +11,9 @@ label="Toggle navigation">
 <li class="nav-item">
 <a class="nav-link active" aria-current="page" href="{{ url('/home') }}">Home</a>
 </li>
+<li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{{ url('/master-data/products') }}">Products</a>
+    </li>
 <li class="nav-item dropdown">
 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
 aria-expanded="false">Profile</a>

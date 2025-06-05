@@ -100,4 +100,11 @@ class AuthController extends Controller
     {
         return redirect()->route('products.index');
     }
+
+    public function showProfile()
+    {
+    $user = Auth::user(); // Mengambil data pengguna yang sedang login
+    return view('profiles.identity', compact('user')); // Mengirim data pengguna ke tampilan
+    }
+
 }

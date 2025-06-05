@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
 
     // Profile routes
     Route::get('/profile', [ProfileController::class, 'profile']);
-    Route::get('/profile/identity', [ProfileController::class, 'identity']);
+    Route::get('/profile/identity', [AuthController::class, 'showProfile']);
     Route::get('/profile/family', [ProfileController::class, 'family']);
 
     // Optional: Halaman home hanya jika dibutuhkan

@@ -23,7 +23,11 @@ class ProductsController extends Controller
     public function index()
     {
         
-        $products = Products::with('category')->latest()->paginate(5);
+        $products = Products::with('category')
+        ->where('user_id', auth()->id())
+        ->latest()
+        ->paginate(5);
+
         $categories = Category::all();
         return view('module.master-data.products.index', compact('products', 'categories'));
 }
@@ -52,10 +56,11 @@ class ProductsController extends Controller
                 'name' => 'required|max:50',
                 'description' => 'nullable',
                 'price' => 'required|numeric',
+                'category_id' => 'required|exists:categories,id',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'is_active' => 'required|boolean'
             ]);
-            $results = $products->updateDate($request->all());
+            $results = $products->updateData($request->all());
             return redirect()->route('products.index')
                 ->with('success', ($results) ? 'Product updated successfully.' : 'Product not found or update failed.');
         }else{
@@ -66,7 +71,9 @@ class ProductsController extends Controller
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'is_active' => 'required|boolean'
             ]);
-            $results = $products->storeData($request->all());
+            $data = $request->all();
+            $data['user_id'] = auth()->id(); // Tambahkan user_id yang sedang login
+            $results = $products->storeData($data);
             return redirect()->route('products.index')
                 ->with('success', ($results) ? 'Product created successfully.' : 'Product creation failed.');
         }

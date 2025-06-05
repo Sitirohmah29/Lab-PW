@@ -32,6 +32,16 @@
                             </p>
                         </div>
 
+                        
+                        <div class="border-top border-bottom py-3 mt-4 mb-3">
+                            <h5 class="mb-0">Category</h5>
+                        </div>
+                        <div class="category">
+                            <p class="text-muted">
+                                {{ $products->category->name ?? '-' }}
+                            </p>
+                        </div>
+
                         <!-- Product Status -->
                         <div class="mt-4">
                             <span class="badge {{ $products->is_active ? 'bg-success' : 'bg-danger' }} fs-6">
